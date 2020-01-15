@@ -9,11 +9,12 @@
 <body>
   <div id="info"></div>
 
+  <div id="test"></div>
+
     <style>
     html, body {
   height: 100%;
   margin: 0;
-  overflow: hidden;
 }
 canvas {
   width: 100%;
@@ -21,10 +22,15 @@ canvas {
   display: block;
 }
 
+#test{
+  min-height: 400px;
+  background:red;
+}
+
     </style>
             <script src="https://unpkg.com/three"></script>
         <script src="https://threejs.org/build/three.min.js"></script>
-        <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+        <script src="js/orbitcontrol.js"></script>
 <script src="https://unpkg.com/@seregpie/three.text-texture"></script>
 <script src="https://unpkg.com/@seregpie/three.text-sprite"></script>
     <script>
@@ -34,19 +40,19 @@ var loader = new THREE.FontLoader();
     loader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/din.json', function ( font ) {
       var geometry = new THREE.TextGeometry( 'Fur die Kinder, die', {
         font: font,
-        size: 0.17,
+        size: 0.15,
         height: 0.007,
         curveSegments: 3,
       } );
       geometry.center();
       var material = new THREE.MeshPhongMaterial({color: 0x000000});
       var mesh = new THREE.Mesh( geometry, material );
-      mesh.position.set( 2 , 2.5 ,0);
+      mesh.position.set( 2 , 2.5 ,0.05);
       mesh.rotation.y -= Math.PI/2;
 
       var geometry2 = new THREE.TextGeometry( 'morgens zur Schule mussen, die', {
         font: font,
-        size: 0.17,
+        size: 0.15,
         height: 0.007,
         curveSegments: 3,
       } );
@@ -58,7 +64,7 @@ var loader = new THREE.FontLoader();
 
       var geometry3 = new THREE.TextGeometry( 'Eltern, die zur Arbeit fahren und', {
         font: font,
-        size: 0.17,
+        size: 0.15,
         height: 0.007,
         curveSegments: 3,
       } );
@@ -70,7 +76,7 @@ var loader = new THREE.FontLoader();
 
       var geometry4 = new THREE.TextGeometry( 'die Betriebe, die ihre Waren und', {
         font: font,
-        size: 0.17,
+        size: 0.15,
         height: 0.007,
         curveSegments: 3,
       } );
@@ -82,7 +88,7 @@ var loader = new THREE.FontLoader();
 
       var geometry5 = new THREE.TextGeometry( 'Dienstleistungen in ganz Europa', {
         font: font,
-        size: 0.17,
+        size: 0.15,
         height: 0.007,
         curveSegments: 3,
       } );
@@ -94,14 +100,14 @@ var loader = new THREE.FontLoader();
 
       var geometry6 = new THREE.TextGeometry( 'anbieten moechten', {
         font: font,
-        size: 0.17,
+        size: 0.15,
         height: 0.007,
         curveSegments: 3,
       } );
       geometry6.center();
       var material6 = new THREE.MeshPhongMaterial({color: 0x000000});
       var mesh6 = new THREE.Mesh( geometry6, material6 );
-      mesh6.position.set( 2 , 1.0 , 0.029);
+      mesh6.position.set( 2 , 1.0 , 0.057);
       mesh6.rotation.y -= Math.PI/2;
 
     	scene.add( mesh, mesh2,mesh3,mesh4,mesh5,mesh6 );
@@ -176,11 +182,14 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 // renderer.physicallyCorrectLights = true;
 
 var canvas = renderer.domElement
-document.body.appendChild(canvas);
+document.getElementById('info').appendChild(canvas);
 var controls = new THREE.OrbitControls(camera, canvas);
-var targetPos = new THREE.Vector3( 1 , 1 , 0 );
+controls.enablePan = false;
+controls.enableZoom = false;
+
+var targetPos = new THREE.Vector3( 1 , 1.4 , 0 );
 camera.lookAt( targetPos );
-controls.target.copy( targetPos );
+controls.target.copy(  targetPos );
 
 var clock = new THREE.Clock();
 var t = 0;
