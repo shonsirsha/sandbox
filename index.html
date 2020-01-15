@@ -4,18 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test</title>
+
+    <title>3js demo</title>
 </head>
 <body>
-  <div id="info"></div>
+
+  <div id="info">
+    <div id="mybutton">
+      <img src="mouse.png" alt="" srcset="">
+      <a style="margin-left: 16px;" href="">scrollen</a>
+    </div>
+
+
+  </div>
 
   <div id="test"></div>
-
+ 
     <style>
     html, body {
   height: 100%;
   margin: 0;
 }
+a{
+    text-decoration: none;
+    color: black
+  }
 canvas {
   width: 100%;
   height: 100%;
@@ -25,6 +38,17 @@ canvas {
 #test{
   min-height: 400px;
   background:red;
+}
+
+#mybutton{
+  cursor:pointer;
+  position: absolute;
+	bottom: 10%;
+  left: 20px;
+	text-align: center;
+	z-index: 100;
+	display:flex;
+  align-items: center;
 }
 
     </style>
@@ -38,7 +62,7 @@ var scene = new THREE.Scene();
 
 var loader = new THREE.FontLoader();
     loader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/din.json', function ( font ) {
-      var geometry = new THREE.TextGeometry( 'Fur die Kinder, die', {
+      var geometry = new THREE.TextGeometry( 'Für die Kinder, die', {
         font: font,
         size: 0.15,
         height: 0.007,
@@ -50,7 +74,7 @@ var loader = new THREE.FontLoader();
       mesh.position.set( 2 , 2.5 ,0.05);
       mesh.rotation.y -= Math.PI/2;
 
-      var geometry2 = new THREE.TextGeometry( 'morgens zur Schule mussen, die', {
+      var geometry2 = new THREE.TextGeometry( 'morgens zur Schule müssen, die', {
         font: font,
         size: 0.15,
         height: 0.007,
@@ -98,7 +122,7 @@ var loader = new THREE.FontLoader();
       mesh5.position.set( 2 , 1.3 , 0.49);
       mesh5.rotation.y -= Math.PI/2;
 
-      var geometry6 = new THREE.TextGeometry( 'anbieten moechten', {
+      var geometry6 = new THREE.TextGeometry( 'anbieten möchten', {
         font: font,
         size: 0.15,
         height: 0.007,
@@ -107,7 +131,7 @@ var loader = new THREE.FontLoader();
       geometry6.center();
       var material6 = new THREE.MeshPhongMaterial({color: 0x000000});
       var mesh6 = new THREE.Mesh( geometry6, material6 );
-      mesh6.position.set( 2 , 1.0 , 0.057);
+      mesh6.position.set( 2 , 1.0 , 0.027);
       mesh6.rotation.y -= Math.PI/2;
 
     	scene.add( mesh, mesh2,mesh3,mesh4,mesh5,mesh6 );
@@ -172,7 +196,7 @@ class PLHelper {
 }
 
 var camera = new THREE.PerspectiveCamera(60, 1, 1, 1000);
-camera.position.set(-1, 1.5, 2);
+camera.position.set(-1, 1.5, 1.8);
 var renderer = new THREE.WebGLRenderer({
   antialias: true
 });
@@ -184,12 +208,14 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 var canvas = renderer.domElement
 document.getElementById('info').appendChild(canvas);
 var controls = new THREE.OrbitControls(camera, canvas);
-controls.enablePan = false;
+controls.enableRotate = false;
 controls.enableZoom = false;
-
+controls.enablePan = false;
 var targetPos = new THREE.Vector3( 1 , 1.4 , 0 );
 camera.lookAt( targetPos );
 controls.target.copy(  targetPos );
+
+
 
 var clock = new THREE.Clock();
 var t = 0;

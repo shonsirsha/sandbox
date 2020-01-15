@@ -249,7 +249,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		scope.domElement.removeEventListener( 'contextmenu', onContextMenu, false );
 		scope.domElement.removeEventListener( 'mousedown', onMouseDown, false );
-		scope.domElement.removeEventListener( 'wheel', onMouseWheel, false );
+		scope.domElement.removeEventListener( 'wheel', onMouseMove, false );
 
 		scope.domElement.removeEventListener( 'touchstart', onTouchStart, false );
 		scope.domElement.removeEventListener( 'touchend', onTouchEnd, false );
@@ -480,6 +480,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	function handleMouseMoveRotate( event ) {
 
+		console.log(event)
+
 		rotateEnd.set( event.clientX, event.clientY );
 
 		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
@@ -537,18 +539,30 @@ THREE.OrbitControls = function ( object, domElement ) {
 		// no-op
 
 	}
+	var rotateWheelDelta = 0;
 
 	function handleMouseWheel( event ) {
-
 		if ( event.deltaY < 0 ) {
-
-			dollyOut( getZoomScale() );
-
+			if(rotateWheelDelta > 0){
+				rotateWheelDelta-= 1.5
+				rotateEnd.set(rotateWheelDelta, 0);
+			}
 		} else if ( event.deltaY > 0 ) {
-
-			dollyIn( getZoomScale() );
-
+			if(rotateWheelDelta < 14.5){
+				rotateWheelDelta+= 1.5
+				rotateEnd.set(rotateWheelDelta, 0);
+			}
 		}
+
+		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
+
+		var element = scope.domElement;
+
+		rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientHeight ); // yes, height
+
+		rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight );
+
+		rotateStart.copy( rotateEnd );
 
 		scope.update();
 
@@ -763,6 +777,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		switch ( event.button ) {
 
+
 			case 0:
 
 				switch ( scope.mouseButtons.LEFT ) {
@@ -780,6 +795,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 						} else {
 
 							if ( scope.enableRotate === false ) return;
+							console.log(event)
+
 
 							handleMouseDownRotate( event );
 
@@ -888,61 +905,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	}
 
-	document.getElementById("info").addEventListener( 'mousemove', onMouseMove, false );
-
-	var oldx = 0;
-	var oldy = 0;
-	var rotateXDelta = 0;
-	var rotateYDelta = 0;
-
 	function onMouseMove( event ) {
-
-		console.log(event.pageX)
-
-		//book
-
-		if (event.pageX < oldx) {
-			if(rotateXDelta < 14){
-				rotateXDelta+= 0.8
-			}
-
-        } else if (event.pageX > oldx) {
-			if(rotateXDelta > -5.5){
-				rotateXDelta-= 0.8
-			}
-		}
-		
-		if (event.pageY < oldy) {
-			if(rotateYDelta < 14){
-				rotateYDelta+= 0.8
-			}
-
-        } else if (event.pageY > oldy) {
-			if(rotateYDelta > -5.5){
-				rotateYDelta-= 0.8
-			}
-		}
-		
-		rotateEnd.set(rotateXDelta,  rotateYDelta);
-
-
-		oldx = event.pageX;
-		oldy = event.pageY;
-
-		
-
-		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
-
-		var element = scope.domElement;
-
-		rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientHeight ); // yes, height
-
-		rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight );
-
-		rotateStart.copy( rotateEnd );
-
-		scope.update();
-
 
 		if ( scope.enabled === false ) return;
 
@@ -953,6 +916,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 			case STATE.ROTATE:
 
 				if ( scope.enableRotate === false ) return;
+
 
 				handleMouseMoveRotate( event );
 
@@ -994,6 +958,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 	}
 
 	function onMouseWheel( event ) {
+
+		console.log(event)
 
 		if ( scope.enabled === false || scope.enableZoom === false || ( state !== STATE.NONE && state !== STATE.ROTATE ) ) return;
 
@@ -1217,7 +1183,7 @@ THREE.OrbitControls.prototype.constructor = THREE.OrbitControls;
 //    Orbit - right mouse, or left mouse + ctrl/meta/shiftKey / touch: two-finger rotate
 //    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
 //    Pan - left mouse, or arrow keys / touch: one-finger move
-``
+
 THREE.MapControls = function ( object, domElement ) {
 
 	THREE.OrbitControls.call( this, object, domElement );
