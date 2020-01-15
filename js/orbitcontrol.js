@@ -602,8 +602,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		} else {
 
-			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
+			var x = 1 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
+			var y = 1 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
 
 			rotateStart.set( x, y );
 
@@ -619,8 +619,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		} else {
 
-			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
+			var x = 1 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
+			var y = 1 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
 
 			panStart.set( x, y );
 
@@ -663,8 +663,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		} else {
 
-			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
+			var x = 1 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
+			var y = 1 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
 
 			rotateEnd.set( x, y );
 
@@ -690,8 +690,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		} else {
 
-			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
+			var x = 1 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
+			var y = 1 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
 
 			panEnd.set( x, y );
 
@@ -903,25 +903,26 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		if (event.pageX < oldx) {
 			if(rotateXDelta < 14){
-				rotateXDelta+= 0.8
+				rotateXDelta+= 1
 			}
 
         } else if (event.pageX > oldx) {
-			if(rotateXDelta > -5.5){
-				rotateXDelta-= 0.8
+			if(rotateXDelta > -10){
+				rotateXDelta-= 1
 			}
 		}
 		
 		if (event.pageY < oldy) {
 			if(rotateYDelta < 14){
-				rotateYDelta+= 0.8
+				rotateYDelta+= 1
 			}
 
         } else if (event.pageY > oldy) {
-			if(rotateYDelta > -5.5){
-				rotateYDelta-= 0.8
+			if(rotateYDelta > -5){
+				rotateYDelta-= 1
 			}
 		}
+
 		
 		rotateEnd.set(rotateXDelta,  rotateYDelta);
 
