@@ -248,7 +248,6 @@ pointL.shadow.bias = 0.005;
 
 pointL.position.set( 15 , 2 , -6 );
 
-
 var pHelper = new PLHelper( 0.5 , 0xff55dd );
 var pHelper2 = new PLHelper( 0.5 , 0xfffff );
 var pHelper3 = new PLHelper( 0.5 , 0xfffff );
@@ -281,11 +280,9 @@ function render() {
     camera.aspect = canvas.clientWidth / canvas.clientHeight;
     camera.updateProjectionMatrix();
   }
-  
   renderer.render(scene, camera);
   requestAnimationFrame(render);
 }
-
 function resize(renderer) {
   const canvas = renderer.domElement;
   const width = canvas.clientWidth;
@@ -297,6 +294,5 @@ function resize(renderer) {
   return needResize;
 }
     </script>
-
 </body>
 </html>
