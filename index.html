@@ -14,10 +14,7 @@
       <img src="mouse.png" alt="" srcset="">
       <a style="margin-left: 16px;" href="">scrollen</a>
     </div>
-
-
   </div>
-
   <div id="test"></div>
  
     <style>
@@ -241,29 +238,16 @@ var clock = new THREE.Clock();
 var t = 0;
 
 // Lights
-var ambientL = new THREE.AmbientLight(0xcccccc, 0.8);
+var ambientL = new THREE.AmbientLight(0xffffff, 0.8);
 var pointL = new THREE.PointLight( 0x005070 ,  15 , 19 , 2 );
-var pointB = new THREE.PointLight( 0x005070 ,1 , 0 ,2);
-var pointC = new THREE.PointLight( 0xffffff , 0.8 , 0 , 2);
-var pointD = new THREE.PointLight( 0xffffff , 0.2 , 0 , 2);
 
 pointL.castShadow = true;
 pointL.shadow.bias = 0.005;
 
-pointB.castShadow = true;
-pointB.shadow.bias = 0.005;
-
-pointC.castShadow = true;
-pointC.shadow.bias = 0.005;
-
-pointD.castShadow = true;
-pointD.shadow.bias = 0.005;
 
 
 pointL.position.set( 15 , 2 , -6 );
-pointB.position.set( 2 ,1.3 , -0.6 );
-pointC.position.set(-4 ,0.9 , -6);
-pointD.position.set(-1 ,0.9 , 0);
+
 
 var pHelper = new PLHelper( 0.5 , 0xff55dd );
 var pHelper2 = new PLHelper( 0.5 , 0xfffff );
@@ -275,9 +259,7 @@ var pHelper3 = new PLHelper( 0.5 , 0xfffff );
 //pointD.add(pHelper3)
 var compensationDirL = new THREE.DirectionalLight( 0xffffff , 0.1 );
 compensationDirL.position.set( -0.3 , 1 , 0 );
-
-scene.add(ambientL, pointL , compensationDirL,pointB,pointC,pointD);
-
+scene.add(ambientL, pointL , compensationDirL);
 
 // GROUND
 var ground = new Floor( 20 , 20 );
@@ -290,10 +272,7 @@ var wallRight = new WhiteWall( 10 , 10 );
 wallRight.position.set( 2 , 4 , 4 );
 wallRight.rotation.y -= Math.PI/2;
 
-
 scene.add( ground , wallLeft , wallRight );
-
-
 
 render();
 
