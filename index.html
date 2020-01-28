@@ -225,9 +225,8 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 var canvas = renderer.domElement
 document.getElementById('info').appendChild(canvas);
 var controls = new THREE.OrbitControls(camera, canvas);
-controls.enableRotate = false;
-controls.enableZoom = false;
-controls.enablePan = false;
+
+
 var targetPos = new THREE.Vector3( 1 , 1.4 , 0 );
 camera.lookAt( targetPos );
 controls.target.copy(  targetPos );
@@ -239,26 +238,42 @@ var t = 0;
 
 // Lights
 var ambientL = new THREE.AmbientLight(0xffffff, 0.8);
-var pointL = new THREE.PointLight( 0x005070 ,  15 , 19 , 2 );
+var pointL = new THREE.PointLight( 0x005070 ,  23 , 19 , 2 );
+var pointL2 = new THREE.PointLight( 0x005070 ,  23 , 19 , 2 );
+var pointB = new THREE.PointLight( 0x005070 ,  7 , 3 , 2 );
+var pointW = new THREE.PointLight( 0xffffff , 1.0 ,2.2 , 2 );
+
 
 pointL.castShadow = true;
 pointL.shadow.bias = 0.005;
+pointL2.castShadow = true;
+pointL2.shadow.bias = 0.005;
 
+pointW.castShadow = true;
+pointW.shadow.bias = 0.005;
 
 
 pointL.position.set( 15 , 2 , -6 );
+pointL2.position.set( 15 , 2 , -6 );
+pointB.position.set( 3.4 ,1.4 , 0 );
+pointW.position.set(-0.1,1.5 , 0.93 );
 
 var pHelper = new PLHelper( 0.5 , 0xff55dd );
 var pHelper2 = new PLHelper( 0.5 , 0xfffff );
 var pHelper3 = new PLHelper( 0.5 , 0xfffff );
+var pHelper4 = new PLHelper( 0.5 , 0xfffff );
 
 // pointL.add( pHelper );
-// pointB.add( pHelper2 );
-// pointC.add(pHelper3);
+pointB.add( pHelper2 );
+pointW.add(pHelper3);
 //pointD.add(pHelper3)
-var compensationDirL = new THREE.DirectionalLight( 0xffffff , 0.1 );
-compensationDirL.position.set( -0.3 , 1 , 0 );
-scene.add(ambientL, pointL , compensationDirL);
+var compensationDirL = new THREE.DirectionalLight( 0xffffff , 0.2 );
+compensationDirL.position.set( -0.3 , 1 , 4 );
+compensationDirL.add(pHelper3);
+
+
+
+scene.add(ambientL, pointL,pointL2 ,pointB, pointW,compensationDirL);
 
 // GROUND
 var ground = new Floor( 20 , 20 );
