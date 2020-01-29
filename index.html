@@ -232,49 +232,6 @@ camera.lookAt( targetPos );
 controls.target.copy(  targetPos );
 
 
-
-var clock = new THREE.Clock();
-var t = 0;
-
-// Lights
-var ambientL = new THREE.AmbientLight(0xffffff, 0.8);
-var pointL = new THREE.PointLight( 0x005070 ,  23 , 19 , 2 );
-var pointL2 = new THREE.PointLight( 0x005070 ,  23 , 19 , 2 );
-var pointB = new THREE.PointLight( 0x005070 ,  7 , 3 , 2 );
-var pointW = new THREE.PointLight( 0xffffff , 1.0 ,2.2 , 2 );
-
-
-pointL.castShadow = true;
-pointL.shadow.bias = 0.005;
-pointL2.castShadow = true;
-pointL2.shadow.bias = 0.005;
-
-pointW.castShadow = true;
-pointW.shadow.bias = 0.005;
-
-
-pointL.position.set( 15 , 2 , -6 );
-pointL2.position.set( 15 , 2 , -6 );
-pointB.position.set( 3.4 ,1.4 , 0 );
-pointW.position.set(-0.1,1.5 , 0.93 );
-
-var pHelper = new PLHelper( 0.5 , 0xff55dd );
-var pHelper2 = new PLHelper( 0.5 , 0xfffff );
-var pHelper3 = new PLHelper( 0.5 , 0xfffff );
-var pHelper4 = new PLHelper( 0.5 , 0xfffff );
-
-// pointL.add( pHelper );
-pointB.add( pHelper2 );
-pointW.add(pHelper3);
-//pointD.add(pHelper3)
-var compensationDirL = new THREE.DirectionalLight( 0xffffff , 0.2 );
-compensationDirL.position.set( -0.3 , 1 , 4 );
-compensationDirL.add(pHelper3);
-
-
-
-scene.add(ambientL, pointL,pointL2 ,pointB, pointW,compensationDirL);
-
 // GROUND
 var ground = new Floor( 20 , 20 );
 ground.geometry.rotateX(-Math.PI * 0.5);
@@ -288,8 +245,51 @@ wallRight.rotation.y -= Math.PI/2;
 
 scene.add( ground , wallLeft , wallRight );
 
-render();
+var clock = new THREE.Clock();
+var t = 0;
 
+// Lights
+var ambientL = new THREE.AmbientLight(0xffffff, 0.8);
+var pointL = new THREE.PointLight( 0x005070 ,  23 , 19 , 2 );
+var pointL2 = new THREE.PointLight( 0x005070 ,  23 , 19 , 2 );
+var pointB = new THREE.PointLight( 0x005070 ,  2 , 10 , 2 );
+
+pointL.castShadow = true;
+pointL.shadow.bias = 0.005;
+pointL2.castShadow = true;
+pointL2.shadow.bias = 0.005;
+
+pointL.position.set( 15 , 2 , -6 );
+pointL2.position.set( 15 , 2 , -6 );
+pointB.position.set( 2.3 ,1.4 , 2 );
+
+var pHelper = new PLHelper( 0.5 , 0xff55dd );
+var pHelper2 = new PLHelper( 0.5 , 0xfffff );
+var pHelper3 = new PLHelper( 0.5 , 0xfffff );
+var pHelper4 = new PLHelper( 0.5 , 0xfffff );
+var pHelper5 = new PLHelper( 0.5 , 0xff5733  );
+
+// pointL.add( pHelper );
+pointB.add( pHelper2 );
+//pointD.add(pHelper3)
+
+var compensationDirL = new THREE.DirectionalLight( 0xffffff , 0.0 );
+compensationDirL.position.set( -0.3 , 1 , 4 );
+compensationDirL.target = wallLeft;
+
+var compensationDirL2 = new THREE.DirectionalLight( 0xffffff , 0.4 );
+compensationDirL2.position.set( -0.3 , 2 , 5 );
+compensationDirL2.target = wallRight;
+
+var blueDirL = new THREE.DirectionalLight( 0x005070 , 1);
+blueDirL.position.set( -0.3 , 2 , 2 );
+blueDirL.target = wallLeft;
+blueDirL.add(pHelper5);
+
+scene.add(ambientL, pointL, pointL2 ,pointB, compensationDirL2,blueDirL);
+
+
+render();
 function render() {
   if (resize(renderer)) {
     camera.aspect = canvas.clientWidth / canvas.clientHeight;
