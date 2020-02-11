@@ -58,6 +58,8 @@ canvas {
 <script src="https://unpkg.com/@seregpie/three.text-texture"></script>
 <script src="https://unpkg.com/@seregpie/three.text-sprite"></script>
 <script src="https://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
+
+
     <script>
 var scene = new THREE.Scene();
 
@@ -251,14 +253,6 @@ var wallRight = new WhiteWall( 10 , 10 );
 wallRight.position.set( 2 , 4 , 4 );
 wallRight.rotation.y -= Math.PI/2;
 
-const button = makeElementObject('button', 0.7, 0.2)    
-    button.css3dObject.element.textContent = "Click me!"
-    button.css3dObject.element.addEventListener('click', () => alert('Button clicked!'))
-    button.position.y = -3.44
-    button.position.z = -0.49
-    button.position.x = -2.7
-wallRight.add(button)
-
 scene.add( ground , wallLeft , wallRight );
 
 var clock = new THREE.Clock();
@@ -266,8 +260,8 @@ var t = 0;
 
 // Lights
 var ambientL = new THREE.AmbientLight(0xffffff, 0.8);
-var pointL = new THREE.PointLight( 0x005070 ,  23 , 19 , 2 );
-var pointL2 = new THREE.PointLight( 0x005070 ,  23 , 19 , 2 );
+var pointL = new THREE.PointLight( 0x005070 ,  9 , 19 , 2 );
+var pointL2 = new THREE.PointLight( 0x005070 ,  9 , 19 , 2 );
 var pointB = new THREE.PointLight( 0x005070 ,  2 , 10 , 2 );
 
 pointL.castShadow = true;
@@ -330,12 +324,6 @@ function makeElementObject(type, width, height) {
     element.style.width = width+'px';
     element.style.height = height+'px';
     element.style.opacity = 0.999;
-    element.style.background = new THREE.Color(
-        Math.random() * 0.21568627451 + 0.462745098039,
-        Math.random() * 0.21568627451 + 0.462745098039,
-        Math.random() * 0.21568627451 + 0.462745098039,
-    ).getStyle();
-
 
     var css3dObject = new THREE.CSS3DObject( element );
     obj.css3dObject = css3dObject
@@ -344,11 +332,11 @@ function makeElementObject(type, width, height) {
     // make an invisible plane for the DOM element to chop
     // clip a WebGL geometry with it.
     var material = new THREE.MeshPhongMaterial({
-        opacity	: 0.15,
-        color	: new THREE.Color( 0x111111 ),
-        blending: THREE.NoBlending,
-        side	: THREE.DoubleSide,
+        opacity	: 0,
+        color	: new THREE.Color( 0x02A0FE ),
+        blending: THREE.NoBlending
     });
+    
     var geometry = new THREE.BoxGeometry( width, height, 1 );
     var mesh = new THREE.Mesh( geometry, material );
     mesh.castShadow = true;

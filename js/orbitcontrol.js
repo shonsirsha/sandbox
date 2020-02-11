@@ -602,8 +602,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		} else {
 
-			var x = 1 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 1 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
+			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
+			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
 
 			rotateStart.set( x, y );
 
@@ -619,8 +619,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		} else {
 
-			var x = 1 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 1 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
+			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
+			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
 
 			panStart.set( x, y );
 
@@ -663,8 +663,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		} else {
 
-			var x = 1 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 1 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
+			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
+			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
 
 			rotateEnd.set( x, y );
 
@@ -690,8 +690,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		} else {
 
-			var x = 1 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
-			var y = 1 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
+			var x = 0.5 * ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX );
+			var y = 0.5 * ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY );
 
 			panEnd.set( x, y );
 
@@ -888,62 +888,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	}
 
-	document.getElementById("info").addEventListener( 'mousemove', onMouseMove, false );
-
-	var oldx = 0;
-	var oldy = 0;
-	var rotateXDelta = 0;
-	var rotateYDelta = 0;
-
 	function onMouseMove( event ) {
-
-		console.log(event.pageX)
-
-		//book
-
-		if (event.pageX < oldx) {
-			if(rotateXDelta < 14){
-				rotateXDelta+= 1
-			}
-
-        } else if (event.pageX > oldx) {
-			if(rotateXDelta > -10){
-				rotateXDelta-= 1
-			}
-		}
-		
-		if (event.pageY < oldy) {
-			if(rotateYDelta < 14){
-				rotateYDelta+= 1
-			}
-
-        } else if (event.pageY > oldy) {
-			if(rotateYDelta > -5){
-				rotateYDelta-= 1
-			}
-		}
-
-		
-		rotateEnd.set(rotateXDelta,  rotateYDelta);
-
-
-		oldx = event.pageX;
-		oldy = event.pageY;
-
-		
-
-		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
-
-		var element = scope.domElement;
-
-		rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientHeight ); // yes, height
-
-		rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight );
-
-		rotateStart.copy( rotateEnd );
-
-		scope.update();
-
 
 		if ( scope.enabled === false ) return;
 
@@ -1218,7 +1163,7 @@ THREE.OrbitControls.prototype.constructor = THREE.OrbitControls;
 //    Orbit - right mouse, or left mouse + ctrl/meta/shiftKey / touch: two-finger rotate
 //    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
 //    Pan - left mouse, or arrow keys / touch: one-finger move
-``
+
 THREE.MapControls = function ( object, domElement ) {
 
 	THREE.OrbitControls.call( this, object, domElement );
