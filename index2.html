@@ -44,9 +44,7 @@ function init() {
     root.position.y = 20
     root.rotation.y = 0
     scene.add(root)
-   
 
-    
     const button = makeElementObject('button', 75, 20)    
     button.css3dObject.element.style.border = '1px solid orange'
     button.css3dObject.element.textContent = "Click me!"
@@ -57,21 +55,20 @@ function init() {
 
     scene.add(root)
 
+    var ambientLight = new THREE.AmbientLight( 0x999999 );
+    root.add( ambientLight );
 
-        var ambientLight = new THREE.AmbientLight( 0x999999 );
-        root.add( ambientLight );
+    light = new THREE.PointLight( 0xffffff, 1, 0 );
+    light.castShadow = true;
+    light.position.z = 150;
+    light.shadow.mapSize.width = 512;  // default
+    light.shadow.mapSize.height = 512; // default
+    light.shadow.camera.near = 1;       // default
+    light.shadow.camera.far = 2000;      // default
+    
+    scene.add( new THREE.PointLightHelper( light, 10 ) )
 
-        light = new THREE.PointLight( 0xffffff, 1, 0 );
-        light.castShadow = true;
-        light.position.z = 150;
-        light.shadow.mapSize.width = 512;  // default
-        light.shadow.mapSize.height = 512; // default
-        light.shadow.camera.near = 1;       // default
-        light.shadow.camera.far = 2000;      // default
-        
-        scene.add( new THREE.PointLightHelper( light, 10 ) )
-
-        root.add( light );
+    root.add( light );
 
     renderer2 = new THREE.CSS3DRenderer();
     renderer2.setSize( window.innerWidth, window.innerHeight );
@@ -97,11 +94,7 @@ function onDocumentMouseMove( event ) {
 }
 
 function animate(time) {
-    
-
-
     renderer2.render( scene, camera );
-
     requestAnimationFrame( animate );
 }
 

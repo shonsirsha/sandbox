@@ -15,7 +15,6 @@
       <a style="margin-left: 16px;" href="">scrollen</a>
     </div>
   </div>
-  <div id="test"></div>
  
     <style>
     html, body {
@@ -30,14 +29,10 @@ canvas {
   width: 100%;
   height: 100%;
   display: block;
+  pointer-events: none;
 }
 #info{
   height: 100vh;
-}
-#test{
-  display:none;
-  min-height: 400px;
-  background:black;
 }
 
 #mybutton{
@@ -290,6 +285,14 @@ compensationDirL.target = wallLeft;
 var compensationDirL2 = new THREE.DirectionalLight( 0xffffff , 0.4 );
 compensationDirL2.position.set( -0.3 , 2 , 5 );
 compensationDirL2.target = wallRight;
+
+const button = makeElementObject('button', 0.7, 0.2)    
+    button.css3dObject.element.textContent = "Click me!"
+    button.css3dObject.element.addEventListener('click', () => alert('Button clicked!'))
+    button.position.y = -3.44
+    button.position.z = -0.49
+    button.position.x = -2.7
+wallRight.add(button)
 
 var blueDirL = new THREE.DirectionalLight( 0x005070 , 1);
 blueDirL.position.set( -0.3 , 2 , 2 );
