@@ -1,66 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <title>3js demo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>test</title>
+<script src="https://unpkg.com/three"></script>
+<script src="https://threejs.org/build/three.min.js"></script>
+<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
+<script>
 
-  <div id="info">
-    <div id="mybutton">
-      <img src="mouse.png" alt="" srcset="">
-      <a style="margin-left: 16px;" href="">scrollen</a>
-    </div>
-  </div>
+const scene = new THREE.Scene();
+renderer = new THREE.WebGLRenderer({antialias:true});
  
-    <style>
-    html, body {
-  height: 100%;
-  margin: 0;
-}
-a{
-    text-decoration: none;
-    color: black
-  }
-canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
-}
-#info{
-  height: 100vh;
-}
-
-#mybutton{
-  cursor:pointer;
-  position: absolute;
-	bottom: 10%;
-  left: 20px;
-	text-align: center;
-	z-index: 100;
-	display:flex;
-  align-items: center;
-}
-
-    </style>
-            <script src="https://unpkg.com/three"></script>
-        <script src="https://threejs.org/build/three.min.js"></script>
-        <script src="js/orbitcontrol.js"></script>
-<script src="https://unpkg.com/@seregpie/three.text-texture"></script>
-<script src="https://unpkg.com/@seregpie/three.text-sprite"></script>
-<script src="https://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
-
-
-    <script>
-var scene = new THREE.Scene();
-
-var loader = new THREE.FontLoader();
-    loader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/din.json', function ( font ) {
-      var geometry = new THREE.TextGeometry( 'Für die Kinder, die', {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.textureEncoding = THREE.sRGBEncoding;
+  renderer.toneMappingExposure = 2.5
+    document.body.appendChild(renderer.domElement);
+    
+    scene.background = new THREE.Color(0xdddddd);
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 1000);
+    camera.position.x = 6;
+    camera.position.y = 3;
+    camera.position.z = 8;
+    camera.zoom = 3;
+        camera.updateProjectionMatrix();
+    const controls = new THREE.OrbitControls( camera, renderer.domElement );
+    //controls.addEventListener('change', renderer);
+   
+   const hlight = new THREE.AmbientLight (0xffffff,0.4);
+    scene.add(hlight);
+    let fontLoader = new THREE.FontLoader();
+    fontLoader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/din.json', function ( font ) {
+        var geometry = new THREE.TextGeometry( 'Für die Kinder, die', {
         font: font,
         size: 0.15,
         height: 0.007,
@@ -69,286 +45,34 @@ var loader = new THREE.FontLoader();
       geometry.center();
       var material = new THREE.MeshPhongMaterial({color: 0x000000});
       var mesh = new THREE.Mesh(geometry, material);
-      mesh.position.set( 2 , 2.5 ,0.05);
-      mesh.rotation.y -= Math.PI/2;
-
-      var geometry2 = new THREE.TextGeometry( 'morgens zur Schule müssen, die', {
-        font: font,
-        size: 0.15,
-        height: 0.007,
-        curveSegments: 3,
-      } );
-      geometry2.center();
-      var material2 = new THREE.MeshPhongMaterial({color: 0x000000});
-      var mesh2 = new THREE.Mesh( geometry2, material2 );
-      mesh2.position.set( 2 , 2.2 , 0.5);
-      mesh2.rotation.y -= Math.PI/2;
-
-      var geometry3 = new THREE.TextGeometry( 'Eltern, die zur Arbeit fahren und', {
-        font: font,
-        size: 0.15,
-        height: 0.007,
-        curveSegments: 3,
-      } );
-      geometry3.center();
-      var material3 = new THREE.MeshPhongMaterial({color: 0x000000});
-      var mesh3 = new THREE.Mesh( geometry3, material3 );
-      mesh3.position.set( 2 , 1.9 , 0.47);
-      mesh3.rotation.y -= Math.PI/2;
-
-      var geometry4 = new THREE.TextGeometry( 'die Betriebe, die ihre Waren und', {
-        font: font,
-        size: 0.15,
-        height: 0.007,
-        curveSegments: 3,
-      } );
-      geometry4.center();
-      var material4 = new THREE.MeshPhongMaterial({color: 0x000000});
-      var mesh4 = new THREE.Mesh( geometry4, material4 );
-      mesh4.position.set( 2 , 1.6 , 0.49);
-      mesh4.rotation.y -= Math.PI/2;
-
-      var geometry5 = new THREE.TextGeometry( 'Dienstleistungen in ganz Europa', {
-        font: font,
-        size: 0.15,
-        height: 0.007,
-        curveSegments: 3,
-      } );
-      geometry5.center();
-      var material5 = new THREE.MeshPhongMaterial({color: 0x000000});
-      var mesh5 = new THREE.Mesh( geometry5, material5 );
-      mesh5.position.set( 2 , 1.3 , 0.49);
-      mesh5.rotation.y -= Math.PI/2;
-
-      var geometry6 = new THREE.TextGeometry( 'anbieten möchten.', {
-        font: font,
-        size: 0.15,
-        height: 0.007,
-        curveSegments: 3,
-      } );
-      geometry6.center();
-      var material6 = new THREE.MeshPhongMaterial({color: 0x000000});
-      var mesh6 = new THREE.Mesh( geometry6, material6 );
-      mesh6.position.set( 2 , 1.0 , 0.027);
-      mesh6.rotation.y -= Math.PI/2;
-
-    	scene.add( mesh, mesh2,mesh3,mesh4,mesh5,mesh6 );
-    } );
-
-    loader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/din_alternate.json', function ( font ) {
-      var geometry = new THREE.TextGeometry( 'Für innovative und vielfältige Mobilität', {
-        font: font,
-        size: 0.065,
-        height: 0.007,
-        curveSegments: 3,
-      } );
-
-      geometry.center();
-      var material = new THREE.MeshPhongMaterial({color: 0x007EC9});
-      var mesh = new THREE.Mesh( geometry, material );
-      mesh.position.set( 2 , 0.56 ,0.16);
-      mesh.rotation.y -= Math.PI/2;
+      mesh.position.set( 1, 2 ,0.5);
+      mesh.rotation.y -= Math.PI/168;
 
       scene.add(mesh)
     });
-
-    class Wall {
-  constructor( sizeX , sizeY , position ){
-    var wall = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry( sizeX ,  sizeY ), 
-      new THREE.MeshStandardMaterial({ 
-        color: 0xf2f2f2
-      })
-    );
-    if( position != undefined ) wall.position.copy( position );
-    wall.castShadow = wall.receiveShadow = true;
-    return wall;
-  }
+  
+    const loader = new THREE.GLTFLoader();
+          loader.load('./correct/scene.glb',
+     ( gltf ) => {
+    scene.add(gltf.scene)
+    },
+     ( xhr ) => {
+         //progress
+    },
+     ( error ) => {
+        console.log( error );
+    }
+);
+const animate = () =>{
+    render();
+    requestAnimationFrame(animate)
 }
-
-class WhiteWall {
-  constructor( sizeX , sizeY , position ){
-    var wall = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry( sizeX ,  sizeY ), 
-      new THREE.MeshStandardMaterial({ 
-        color: 0xffffff
-      })
-    );
-    if( position != undefined ) wall.position.copy( position );
-    wall.castShadow = wall.receiveShadow = true;
-    return wall;
-  }
-}
-
-class Floor {
-  constructor( sizeX , sizeY , position ){
-    var wall = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry( sizeX ,  sizeY ), 
-      new THREE.MeshStandardMaterial({ 
-        color: 0xffffff
-      })
-    );
-    if( position != undefined ) wall.position.copy( position );
-    wall.castShadow = wall.receiveShadow = true;
-    return wall;
-  }
-}
-
-class PLHelper {
-  constructor( diameter , color , position ){
-    var helper = new THREE.Mesh(
-      new THREE.SphereBufferGeometry( diameter/2 , 5 , 5 ), 
-      new THREE.MeshBasicMaterial({ 
-        color: color
-      })
-    );
-    if( position != undefined ) helper.position.copy( position );
-    return helper;
-  }
-}
-
-    root = new THREE.Object3D()
-    root.position.y = 20
-    root.rotation.y = Math.PI / 3
-    scene.add(root)
-    
-   
-
-
-var camera = new THREE.PerspectiveCamera(60, 1, 1, 1000);
-camera.position.set(-1, 1.5, 1.8);
-var renderer = new THREE.WebGLRenderer({
-  antialias: true
-});
-renderer.shadowMap.enabled = true;
-// renderer.shadowMap.type = THREE.VSMShadowMap;	
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;	
-// renderer.physicallyCorrectLights = true;
-
-var canvas = renderer.domElement
-document.getElementById('info').appendChild(canvas);
-var controls = new THREE.OrbitControls(camera, canvas);
-
-
-var targetPos = new THREE.Vector3( 1 , 1.4 , 0 );
-camera.lookAt( targetPos );
-controls.target.copy(  targetPos );
-
-controls.enablePan = false;
-controls.enableRotate = false;
-controls.enableZoom = false;
-// GROUND
-var ground = new Floor( 20 , 20 );
-ground.geometry.rotateX(-Math.PI * 0.5);
-
-// WALLS
-var wallLeft = new WhiteWall( 20 , 10 );
-wallLeft.position.set(0, 5, -7);
-var wallRight = new WhiteWall( 10 , 10 );
-wallRight.position.set( 2 , 4 , 4 );
-wallRight.rotation.y -= Math.PI/2;
-
-scene.add( ground , wallLeft , wallRight );
-
-var clock = new THREE.Clock();
-var t = 0;
-
-// Lights
-var ambientL = new THREE.AmbientLight(0xffffff, 0.8);
-var pointL = new THREE.PointLight( 0x005070 ,  9 , 19 , 2 );
-var pointL2 = new THREE.PointLight( 0x005070 ,  9 , 19 , 2 );
-var pointB = new THREE.PointLight( 0x005070 ,  2 , 10 , 2 );
-
-pointL.castShadow = true;
-pointL.shadow.bias = 0.005;
-pointL2.castShadow = true;
-pointL2.shadow.bias = 0.005;
-
-pointL.position.set( 15 , 2 , -6 );
-pointL2.position.set( 15 , 2 , -6 );
-pointB.position.set( 2.3 ,1.4 , 2 );
-
-var pHelper = new PLHelper( 0.5 , 0xff55dd );
-var pHelper2 = new PLHelper( 0.5 , 0xfffff );
-var pHelper3 = new PLHelper( 0.5 , 0xfffff );
-var pHelper4 = new PLHelper( 0.5 , 0xfffff );
-var pHelper5 = new PLHelper( 0.5 , 0xff5733  );
-
-// pointL.add( pHelper );
-pointB.add( pHelper2 );
-//pointD.add(pHelper3)
-
-var compensationDirL = new THREE.DirectionalLight( 0xffffff , 0.0 );
-compensationDirL.position.set( -0.3 , 1 , 4 );
-compensationDirL.target = wallLeft;
-
-var compensationDirL2 = new THREE.DirectionalLight( 0xffffff , 0.4 );
-compensationDirL2.position.set( -0.3 , 2 , 5 );
-compensationDirL2.target = wallRight;
-
-const button = makeElementObject('button', 0.7, 0.2)    
-    button.css3dObject.element.textContent = "Click me!"
-    button.css3dObject.element.addEventListener('click', () => alert('Button clicked!'))
-    button.position.y = -3.44
-    button.position.z = -0.49
-    button.position.x = -2.7
-wallRight.add(button)
-
-var blueDirL = new THREE.DirectionalLight( 0x005070 , 1);
-blueDirL.position.set( -0.3 , 2 , 2 );
-blueDirL.target = wallLeft;
-
-scene.add(ambientL, pointL, pointL2 ,pointB, compensationDirL2,blueDirL);
-
-render();
-function render() {
-  if (resize(renderer)) {
-    camera.aspect = canvas.clientWidth / canvas.clientHeight;
-    camera.updateProjectionMatrix();
-  }
-  renderer.render(scene, camera);
-  requestAnimationFrame(render);
-}
-function resize(renderer) {
-  const canvas = renderer.domElement;
-  const width = canvas.clientWidth;
-  const height = canvas.clientHeight;
-  const needResize = canvas.width !== width || canvas.height !== height;
-  if (needResize) {
-    renderer.setSize(width, height, false);
-  }
-  return needResize;
-}
-
-function makeElementObject(type, width, height) {
-    const obj = new THREE.Object3D
-
-    const element = document.createElement( type );
-    element.style.width = width+'px';
-    element.style.height = height+'px';
-    element.style.opacity = 0.999;
-
-    var css3dObject = new THREE.CSS3DObject( element );
-    obj.css3dObject = css3dObject
-    obj.add(css3dObject)
-
-    // make an invisible plane for the DOM element to chop
-    // clip a WebGL geometry with it.
-    var material = new THREE.MeshPhongMaterial({
-        opacity	: 0,
-        color	: new THREE.Color( 0x02A0FE ),
-        blending: THREE.NoBlending
-    });
-    
-    var geometry = new THREE.BoxGeometry( width, height, 1 );
-    var mesh = new THREE.Mesh( geometry, material );
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-    obj.lightShadowMesh = mesh
-    obj.add( mesh );
-
-    return obj
-}
-    </script>
+    const render = () =>{
+        requestAnimationFrame(render);
+        renderer.render(scene,camera)
+    }
+    render();
+</script>
 </body>
 </html>
+
