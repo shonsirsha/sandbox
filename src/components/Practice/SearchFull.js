@@ -1,6 +1,6 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import { Row, Col } from "react-bootstrap"
+import { useStaticQuery, graphql, Link } from "gatsby"
+import { Row, Col, Card, Button } from "react-bootstrap"
 
 export const SearchFull = () => {
   const data = useStaticQuery(graphql`
@@ -33,23 +33,34 @@ export const SearchFull = () => {
   `)
 
   const practices = data.allContentfulPractice.edges
-  console.log(practices.length)
 
   return (
     <div>
       <h2>Find the closest practice to you</h2>
 
       <h3>Map Section</h3>
-
+      <hr />
       <h3>List / Grid Section</h3>
       <Row>
         {practices.map(({ node: practice }) => (
-          <Col>
-            <h4>{practice.name}</h4>
+          <Col key={practice.id}>
+            <Card>
+              <Card.Body>
+                <Card.Title>{practice.name}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">
+                  {practice.address}
+                </Card.Subtitle>
+
+                <pre>{JSON.stringify(practice, null, 4)}</pre>
+
+                <Button variant="primary" as={Link} to="/practices/x">
+                  Practice Page
+                </Button>
+              </Card.Body>
+            </Card>
           </Col>
         ))}
       </Row>
-      <pre>{JSON.stringify(data, null, 4)}</pre>
     </div>
   )
 }
