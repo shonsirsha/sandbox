@@ -15,9 +15,7 @@ export default function BlogPost({ data: { contentfulBlogPost } }) {
         <Container>
           <Row>
             <Col>
-              <div className="m-5">
-                <h1 className="display-1">{title}</h1>
-              </div>
+              <h1 className="display-1">{title}</h1>
             </Col>
           </Row>
         </Container>
