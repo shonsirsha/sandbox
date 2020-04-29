@@ -1,12 +1,9 @@
 import React from "react"
-
 import { Container, Row, Col } from "react-bootstrap"
 
 import styled from "styled-components"
 
 const StyledFooter = styled.footer`
-  padding-top: 4rem;
-  padding-bottom: 2rem;
   background-color: #ccc;
 `
 

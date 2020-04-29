@@ -1,18 +1,17 @@
 import React from "react"
-import { Link } from "gatsby"
 import { Container } from "react-bootstrap"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { SearchFull } from "../components/Practice/SearchFull"
 
-const Index = () => (
+const Practices = () => (
   <Layout>
     <SEO title="Homepage" />
     <Container className="py-5">
-      <h1>Home</h1>
-      <p>Welcome to the Homepage</p>
-      <Link to="/practices">View Practices</Link>
+      <h1>Practices</h1>
+      <SearchFull />
     </Container>
   </Layout>
 )
 
-export default Index
+export default Practices
