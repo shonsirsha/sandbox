@@ -1,19 +1,20 @@
 import React from "react"
 import styled from "styled-components"
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Button } from "react-bootstrap"
 import { Link } from "gatsby"
 
 const StyledHeader = styled.header`
-  background: navy;
-  color: #fff;
+  a {
+    color: #fff;
+  }
 `
 
 const Header = ({ siteTitle }) => (
-  <StyledHeader>
+  <StyledHeader className="bg-primary text-white py-5">
     <Container>
       <Row>
-        <Col>{siteTitle}</Col>
-        <Col className="text-right">
+        <Col>{siteTitle} - Logo</Col>
+        <Col className="text-center">
           <span className="mr-3">
             <Link to="/">home</Link>
           </span>
@@ -29,6 +30,14 @@ const Header = ({ siteTitle }) => (
           <span className="mr-3">
             <Link to="/for-vets">for vets</Link>
           </span>
+        </Col>
+        <Col>
+          <Row>
+            <Col>Lang. Switcher</Col>
+            <Col>
+              <Button variant="secondary">Book Now</Button>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Container>
