@@ -9,6 +9,7 @@ import { InfoImage } from "../components/Info/InfoImage"
 import { TestimonialSlider } from "../components/Testimonials/TestimonialSlider"
 import { SearchMini } from "../components/Practice/SearchMini"
 import { MedicalTeamList } from "../components/MedicalTeam/MedicalTeamList"
+import { BlogPostListGrid } from "../components/BlogPost/BlogPostListGrid"
 
 const Index = () => (
   <Layout>
@@ -22,6 +23,7 @@ const Index = () => (
     <InfoImage reversed />
     <SearchMini />
     <MedicalTeamList />
+    <BlogPostListGrid buttonText="Visit Our Blog" buttonURL="/blog" />
 
     <Container className="py-5">
       <h1>Home</h1>
