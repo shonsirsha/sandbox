@@ -6,12 +6,16 @@ import SEO from "../components/seo"
 import { Hero } from "../components/Hero/Hero"
 import { FeatureList } from "../components/Features/FeatureList"
 import { InfoImage } from "../components/Info/InfoImage"
+import { TestimonialSlider } from "../components/Testimonials/TestimonialSlider"
 
 const Index = () => (
   <Layout>
     <SEO title="Homepage" />
     <Hero variant="Home" />
     <FeatureList />
+    <InfoImage textCenter />
+    <InfoImage textCenter reversed />
+    <TestimonialSlider />
     <InfoImage />
     <InfoImage reversed />
     <Container className="py-5">

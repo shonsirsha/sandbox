@@ -1,10 +1,10 @@
 import React from "react"
 import { Button, Row, Col, Container } from "react-bootstrap"
 
-export const InfoImage = ({ reversed }) => {
+export const InfoImage = ({ reversed, textCenter }) => {
   return (
     <Container fluid>
-      <Row className={`${reversed ? "flex-row-reverse" : ""}`}>
+      <Row className={`${reversed ? "flex-row-reverse" : ""} `}>
         <Col>
           <div className="p-5 m-5">
             <p className="text-uppercase">Welcome</p>
