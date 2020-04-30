@@ -1,13 +1,12 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import { Container, Row, Col } from "react-bootstrap"
 import SEO from "../components/seo"
-const urlSlug = require("url-slug")
 
 export default function PracticeService({ data: { contentfulPractice } }) {
   console.log(contentfulPractice)
-  const { name, address, services, vets, blogPosts } = contentfulPractice
+  const { name, services } = contentfulPractice
   const service = services[0].name
 
   return (
