@@ -9,6 +9,7 @@ export default function Practice({ data: { contentfulPractice } }) {
   console.log(contentfulPractice)
   const { name, address, services, vets, blogPosts } = contentfulPractice
 
+  const slugPractice = urlSlug(name)
   return (
     <>
       <SEO title={`${name} | Practice`} />
@@ -22,7 +23,14 @@ export default function Practice({ data: { contentfulPractice } }) {
               <h2>Services</h2>
               {services &&
                 services.map(service => {
-                  return <p>{service.name}</p>
+                  const slugService = urlSlug(service.name)
+                  return (
+                    <Link
+                      to={`/practices/${slugPractice}/services/${slugService}`}
+                    >
+                      <p>{service.name}</p>
+                    </Link>
+                  )
                 })}
               <h2>Vets</h2>
               {vets &&
