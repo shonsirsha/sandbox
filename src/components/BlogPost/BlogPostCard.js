@@ -1,6 +1,5 @@
 import React from "react"
-import { Card, Button } from "react-bootstrap"
-import { FaDotCircle } from "react-icons/fa"
+import { Card } from "react-bootstrap"
 import { Link } from "gatsby"
 
 export const BlogPostCard = () => {

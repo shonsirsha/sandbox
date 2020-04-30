@@ -14,8 +14,8 @@ export const FeatureList = () => {
         <Row>
           {[...Array(4)].map((_, i) => {
             return (
-              <Col>
-                <FeatureItem key={i} />
+              <Col key={i}>
+                <FeatureItem />
               </Col>
             )
           })}

@@ -19,23 +19,23 @@ export const BlogPostListGrid = ({
         <Row className="py-5">
           {[...Array(3)].map((_, i) => {
             return (
-              <Col>
-                <BlogPostCard key={i} />
+              <Col key={i}>
+                <BlogPostCard />
               </Col>
             )
           })}
         </Row>
-      </Container>
 
-      {buttonText && buttonURL && (
-        <Row>
-          <Col className="text-center">
-            <Button as={Link} to={buttonURL}>
-              {buttonText}
-            </Button>
-          </Col>
-        </Row>
-      )}
+        {buttonText && buttonURL && (
+          <Row>
+            <Col className="text-center">
+              <Button as={Link} to={buttonURL}>
+                {buttonText}
+              </Button>
+            </Col>
+          </Row>
+        )}
+      </Container>
     </div>
   )
 }

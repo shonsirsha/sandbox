@@ -14,8 +14,8 @@ export const MedicalTeamList = () => {
         <Row className="py-5">
           {[...Array(3)].map((_, i) => {
             return (
-              <Col>
-                <MedicalTeamCard key={i} />
+              <Col key={i}>
+                <MedicalTeamCard />
               </Col>
             )
           })}
