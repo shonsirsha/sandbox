@@ -36,6 +36,10 @@ exports.createPages = ({ actions, graphql }) => {
             node {
               id
               name
+              services {
+                id
+                name
+              }
             }
           }
         }
@@ -66,6 +70,23 @@ exports.createPages = ({ actions, graphql }) => {
       console.log(
         `Created Practice detail page for - http://localhost:8000/practices/${slug}`
       )
+
+      //  Now create pages for the services a practice offers
+      //  Get the array of services offered
+      const { services } = node
+
+      //  Loop through and create a page for each
+      services.forEach(service => {
+        // Create slug from name
+        const slugService = urlSlug(service.name)
+        createPage({
+          path: `/practices/${slug}/services/${slugService}`,
+          component: path.resolve(`src/templates/practice-service.js`),
+          context: {
+            id: service.id,
+          },
+        })
+      })
     })
     // Create pages for each blog post.
     result.data.allContentfulBlogPost.edges.forEach(({ node }) => {
