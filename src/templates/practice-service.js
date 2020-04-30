@@ -8,6 +8,7 @@ const urlSlug = require("url-slug")
 export default function PracticeService({ data: { contentfulPractice } }) {
   console.log(contentfulPractice)
   const { name, address, services, vets, blogPosts } = contentfulPractice
+  const service = services[0].name
 
   return (
     <>
@@ -16,28 +17,14 @@ export default function PracticeService({ data: { contentfulPractice } }) {
         <Container>
           <Row>
             <Col>
-              <h1 className="display-1">{name}</h1>
-              <p>{address}</p>
+              <h1 className="display-1">
+                {service} Service page for {name}
+              </h1>
 
               <h2>Services</h2>
               {services &&
                 services.map(service => {
                   return <p>{service.name}</p>
-                })}
-              <h2>Vets</h2>
-              {vets &&
-                vets.map(vet => {
-                  return <p>{vet.name}</p>
-                })}
-              <h2>Blog Posts</h2>
-              {blogPosts &&
-                blogPosts.map(post => {
-                  const slug = urlSlug(post.title)
-                  return (
-                    <p>
-                      <Link to={`/blog/${slug}`}>{post.title}</Link>
-                    </p>
-                  )
                 })}
             </Col>
           </Row>

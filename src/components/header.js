@@ -13,7 +13,9 @@ const Header = ({ siteTitle }) => (
   <StyledHeader className="bg-primary text-white py-5">
     <Container>
       <Row>
-        <Col>{siteTitle} - Logo</Col>
+        <Col>
+          <Link to="/">{siteTitle} - Logo</Link>
+        </Col>
         <Col className="text-center">
           <span className="mr-3">
             <Link to="/">home</Link>
