@@ -8,6 +8,7 @@ import { FeatureList } from "../components/Features/FeatureList"
 import { InfoImage } from "../components/Info/InfoImage"
 import { TestimonialSlider } from "../components/Testimonials/TestimonialSlider"
 import { SearchMini } from "../components/Practice/SearchMini"
+import { MedicalTeamList } from "../components/MedicalTeam/MedicalTeamList"
 
 const Index = () => (
   <Layout>
@@ -20,6 +21,7 @@ const Index = () => (
     <InfoImage />
     <InfoImage reversed />
     <SearchMini />
+    <MedicalTeamList />
 
     <Container className="py-5">
       <h1>Home</h1>
