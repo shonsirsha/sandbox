@@ -5,12 +5,15 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Hero } from "../components/Hero/Hero"
 import { FeatureList } from "../components/Features/FeatureList"
+import { InfoImage } from "../components/Info/InfoImage"
 
 const Index = () => (
   <Layout>
     <SEO title="Homepage" />
     <Hero variant="Home" />
     <FeatureList />
+    <InfoImage />
+    <InfoImage reversed />
     <Container className="py-5">
       <h1>Home</h1>
       <p>Welcome to the Homepage</p>
